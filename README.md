@@ -47,8 +47,7 @@ This project provides an automated solution for backing up a PostgreSQL database
    # Google Drive Configuration
    DRIVE_FOLDER_PATH=database/backups
    GOOGLE_SERVICE_ACCOUNT_EMAIL=your_service_account_email@your-project.iam.gserviceaccount.com
-   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----YOUR_PRIVATE_KEY-----END PRIVATE KEY-----
-"
+   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----YOUR_PRIVATE_KEY-----END PRIVATE KEY-----"
    ```
 
 2. **Enable the Google Drive API** and create a service account with the necessary permissions. For more information, see the [Google Cloud documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts).
