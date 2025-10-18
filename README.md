@@ -1,4 +1,4 @@
-# 🐘 PostgreSQL Backup to Google Drive
+# PostgreSQL Backup to Google Drive
 
 This project provides an automated solution for backing up a PostgreSQL database and securely uploading the backup files to a specified Google Drive folder. The script is scheduled to run daily, ensuring regular backups without manual intervention.
 
