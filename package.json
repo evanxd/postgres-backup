@@ -1,0 +1,23 @@
+{
+  "name": "postgres-backup",
+  "version": "1.0.0",
+  "description": "Automated PostgreSQL backup to Google Drive",
+  "license": "MIT",
+  "author": "Evan Tseng-Jen Tseng <evan@tseng.io>",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --require dotenv/config dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "googleapis": "^164.0.0",
+    "node-cron": "^4.2.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node24": "^24.0.1",
+    "@types/node": "^24.8.1",
+    "typescript": "^5.9.3"
+  }
+}
