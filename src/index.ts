@@ -2,7 +2,7 @@ import cron from "node-cron";
 import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
-import { databaseConfig } from "./config.js";
+import { databaseConfig, scheduleExpression } from "./config.js";
 import { uploadToDrive } from "./drive.js";
 import util from "util";
 
@@ -27,7 +27,7 @@ async function performBackup() {
   }
 }
 
-cron.schedule("0 3 * * *", () => {
+cron.schedule(scheduleExpression, () => {
   console.log("⏰ Triggering daily backup job...");
   performBackup();
 });

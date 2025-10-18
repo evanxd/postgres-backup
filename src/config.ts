@@ -16,3 +16,5 @@ export const googleApiCredentials = {
   client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
   private_key: process.env.GOOGLE_PRIVATE_KEY,
 };
+
+export const scheduleExpression = process.env.SCHEDULE_EXPRESSION || "0 3 * * *";
