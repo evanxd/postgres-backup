@@ -7,7 +7,6 @@ This project provides an automated solution for backing up a PostgreSQL database
 - **Automated Backups**: Utilizes `node-cron` to schedule and perform daily database backups.
 - **Secure Uploads**: Leverages Google Drive API for securely uploading backup files.
 - **Customizable Configuration**: Easily configure database credentials, Google Drive folder path, and Google API credentials through environment variables.
-- **Error Handling**: Implements error handling for both the backup and upload processes.
 - **Local File Cleanup**: Automatically deletes the local backup file after a successful upload to Google Drive.
 
 ## 📝 Prerequisites
