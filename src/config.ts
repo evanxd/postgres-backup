@@ -10,11 +10,13 @@ export const databaseConfig = {
   database: process.env.DB_DATABASE,
 };
 
-export const driveFolderPath = process.env.DRIVE_FOLDER_PATH || "database/backups";
+export const driveFolderPath =
+  process.env.DRIVE_FOLDER_PATH || "database/backups";
 
 export const googleApiCredentials = {
   client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
   private_key: process.env.GOOGLE_PRIVATE_KEY,
 };
 
-export const scheduleExpression = process.env.SCHEDULE_EXPRESSION || "0 3 * * *";
+export const scheduleExpression =
+  process.env.SCHEDULE_EXPRESSION || "0 3 * * *";

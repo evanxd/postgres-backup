@@ -1,10 +1,14 @@
-import { google } from "googleapis";
 import fs from "fs";
 import path from "path";
+
+import { google } from "googleapis";
+
 import { googleApiCredentials, driveFolderPath } from "./config.js";
 
 if (!googleApiCredentials.client_email || !googleApiCredentials.private_key) {
-  throw new Error("Google API credentials are not defined. Please check your environment variables.");
+  throw new Error(
+    "Google API credentials are not defined. Please check your environment variables.",
+  );
 }
 
 const auth = new google.auth.GoogleAuth({
@@ -18,39 +22,38 @@ const auth = new google.auth.GoogleAuth({
 const driveService = google.drive({ version: "v3", auth });
 
 async function getOrCreateDriveFolderPath(folderPath: string): Promise<string> {
-    let parentId = "root";
+  let parentId = "root";
 
-    const folders = folderPath.split("/").filter(p => p);
+  const folders = folderPath.split("/").filter((p) => p);
 
-    for (const folder of folders) {
-        const res = await driveService.files.list({
-            q: `"${parentId}" in parents and name = "${folder}" and mimeType = "application/vnd.google-apps.folder" and trashed = false`,
-            fields: "files(id)",
-            pageSize: 1,
-        });
+  for (const folder of folders) {
+    const res = await driveService.files.list({
+      q: `"${parentId}" in parents and name = "${folder}" and mimeType = "application/vnd.google-apps.folder" and trashed = false`,
+      fields: "files(id)",
+      pageSize: 1,
+    });
 
-        if (res.data.files && res.data.files.length > 0 && res.data.files[0].id) {
-            parentId = res.data.files[0].id;
-        } else {
-            const fileMetadata = {
-                name: folder,
-                mimeType: "application/vnd.google-apps.folder",
-                parents: [parentId],
-            };
-            const file = await driveService.files.create({
-                requestBody: fileMetadata,
-                fields: "id",
-            });
-            if (!file.data.id) {
-                throw new Error(`Could not create folder ${folder}`);
-            }
-            parentId = file.data.id;
-        }
+    if (res.data.files && res.data.files.length > 0 && res.data.files[0].id) {
+      parentId = res.data.files[0].id;
+    } else {
+      const fileMetadata = {
+        name: folder,
+        mimeType: "application/vnd.google-apps.folder",
+        parents: [parentId],
+      };
+      const file = await driveService.files.create({
+        requestBody: fileMetadata,
+        fields: "id",
+      });
+      if (!file.data.id) {
+        throw new Error(`Could not create folder ${folder}`);
+      }
+      parentId = file.data.id;
     }
+  }
 
-    return parentId;
+  return parentId;
 }
-
 
 export async function uploadToDrive(localFilePath: string): Promise<void> {
   try {
@@ -74,9 +77,9 @@ export async function uploadToDrive(localFilePath: string): Promise<void> {
     });
 
     if (res.data.webViewLink) {
-        console.log(`✅ Uploaded: ${res.data.name} (${res.data.webViewLink})`);
+      console.log(`✅ Uploaded: ${res.data.name} (${res.data.webViewLink})`);
     } else {
-        console.log(`✅ Uploaded: ${res.data.name} (link not available)`);
+      console.log(`✅ Uploaded: ${res.data.name} (link not available)`);
     }
 
     fs.unlink(localFilePath, (err) => {
